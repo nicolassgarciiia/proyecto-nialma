@@ -45,9 +45,6 @@ export async function POST(request: Request) {
     let distance = null
     let duration = null
 
-    // --- ¡AQUÍ ESTÁ EL ARREGLO! ---
-    // El resumen no está en 'feature.summary',
-    // está DENTRO de 'feature.properties'
     if (feature.properties && feature.properties.summary) {
       console.log("El 'summary' SÍ existe. Leyendo 'distance'...");
       distance = feature.properties.summary.distance // en metros

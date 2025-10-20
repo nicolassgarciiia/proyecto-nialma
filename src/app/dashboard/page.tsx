@@ -2,8 +2,6 @@
 'use client'
 
 import { useEffect, useState, useMemo } from 'react'
-// ¡OJO AQUÍ! Asegúrate de que esta ruta sea correcta para tu proyecto
-// Podría ser '@/lib/supabaseClient' o '../../lib/supabaseClient'
 import { supabase } from '@/lib/supabaseClient' 
 import { useRouter } from 'next/navigation'
 import type { User } from '@supabase/supabase-js'
@@ -44,7 +42,7 @@ export default function Dashboard() {
 
   // Carga dinámica del mapa (con tu alias correcto)
   const Map = useMemo(() => dynamic(
-    () => import('@/components/Map'), // O '../../components/Map'
+    () => import('@/components/Map'), 
     { 
       loading: () => <p className="text-center">Cargando mapa...</p>,
       ssr: false 
@@ -60,7 +58,7 @@ export default function Dashboard() {
       }
       setUser(user)
       
-      // Aquí estaba el error de 'any' que corregimos
+
       const { data, error }: { data: Place[] | null; error: any } = await supabase
         .from('places')
         .select('*')
@@ -115,7 +113,7 @@ export default function Dashboard() {
     }
   }
 
-  // handleCalculateRoute (¡CON LA CORRECCIÓN!)
+  // handleCalculateRoute 
   const handleCalculateRoute = async () => {
     if (!startPlaceId || !endPlaceId) {
       setRouteMessage('Por favor, selecciona un origen y un destino.');
@@ -151,9 +149,8 @@ export default function Dashboard() {
 
       // 3. Guardar la geometría y la info de la ruta
       setRouteGeometry(data.geometry)
-      setRouteInfo({ distance: data.distance, duration: data.duration }) // data.distance puede ser null
+      setRouteInfo({ distance: data.distance, duration: data.duration })
 
-      // --- ¡AQUÍ ESTÁ LA CORRECCIÓN! ---
       // Comprobamos si distance y duration NO son null
       if (data.distance !== null && data.duration !== null) {
         setRouteMessage(

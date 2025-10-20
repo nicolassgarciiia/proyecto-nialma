@@ -25,10 +25,8 @@ interface Place {
   lng: number;
 }
 
-// ¡NUEVO TIPO! Geometría de la Ruta
 type RouteGeometry = [number, number][]; // [[lat, lng], [lat, lng], ...]
 
-// ¡PROPS ACTUALIZADAS! Ahora también acepta 'routeGeometry'
 interface MapProps {
   places: Place[];
   routeGeometry: RouteGeometry | null; // Puede ser la ruta, o null si no hay
